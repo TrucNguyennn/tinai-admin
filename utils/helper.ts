@@ -1,4 +1,4 @@
-const transformStatusToTag = (status: string) => {
+export const transformStatusToTag = (status: string) => {
   switch (status) {
     case `Approved`:
       return `success`;
@@ -12,4 +12,7 @@ const transformStatusToTag = (status: string) => {
       return `processing`;
   }
 };
-export default transformStatusToTag;
+
+export const doingSomething = () => {
+  // do something
+};
