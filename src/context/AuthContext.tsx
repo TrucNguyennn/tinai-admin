@@ -1,4 +1,4 @@
-import { AuthContextType } from '@type/context/auth-context';
+import { AuthContextType } from '@/@type/context/auth-context';
 import React from 'react';
 const AuthContext = React.createContext<AuthContextType | string>(
   `useAuth should be used inside AuthProvider`,

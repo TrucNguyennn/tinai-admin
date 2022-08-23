@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { IResponse } from './../@type/interface/response.d';
-import { getItemLocalStorage } from './storage';
+import { IResponse } from '../@type/interface/response';
+import getItemLocalStorage from './storage';
 
 const http = axios.create({
   headers: {
