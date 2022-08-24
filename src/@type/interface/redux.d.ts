@@ -1,0 +1,3 @@
+interface IAuth {
+  isLogin: boolean;
+}

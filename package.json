@@ -6,19 +6,64 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint --ignore-path .gitignore \"src/**/*.+(ts|js|tsx)\" --fix",
+    "format": "prettier --ignore-path .gitignore \"src/**/*.+(ts|js|tsx)\" --write",
+    "postinstall": "husky install",
+    "pre-commit": "lint-staged",
+    "prepare": "husky install"
   },
   "dependencies": {
+    "antd": "^4.22.4",
+    "axios": "0.27.2",
+    "chart.js": "^3.9.1",
     "next": "12.2.4",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-chartjs-2": "^4.3.1",
+    "react-circular-progressbar": "^2.1.0",
+    "react-dom": "18.2.0",
+    "react-icons": "^4.4.0",
+    "sass": "^1.54.3",
+    "@reduxjs/toolkit": "1.8.4",
+    "react-redux": "8.0.2",
+    "redux-persist": "6.0.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "17.0.3",
+    "@commitlint/config-conventional": "17.0.3",
     "@types/node": "18.6.5",
     "@types/react": "18.0.17",
     "@types/react-dom": "18.0.6",
+    "@typescript-eslint/eslint-plugin": "5.33.0",
+    "@typescript-eslint/parser": "5.33.0",
+    "@types/react-redux": "7.1.24",
     "eslint": "8.21.0",
     "eslint-config-next": "12.2.4",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-import-resolver-typescript": "3.4.0",
+    "eslint-plugin-prettier": "4.2.1",
+    "husky": "8.0.1",
+    "lint-staged": "13.0.3",
+    "prettier": "2.7.1",
     "typescript": "4.7.4"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "npm run lint",
+      "npm run format",
+      "git add ."
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "applypatch-msg": "echo \"[Husky] applypatch-msg\"",
+      "pre-applypatch": "echo \"[Husky] pre-applypatch\"",
+      "post-applypatch": "echo \"[Husky] post-applypatch\"",
+      "pre-commit": "prettier --write . && git add -a ."
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   }
 }
