@@ -1,0 +1,25 @@
+.signIn {
+    width: 100vw;
+    height: 100vh;
+    padding: 50px;
+
+    &__title {
+        font-size: 3.2rem;
+        font-weight: 700;
+        font-family: 'SVN-Gilroy', sans-serif;
+        text-align: left;
+        color: #7a56fe;
+    }
+
+    &__formSignIn {
+        margin: 0 auto;
+        margin-top: 50px;
+        width: 300px;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    &__button {
+        width: 100%;
+    }
+}

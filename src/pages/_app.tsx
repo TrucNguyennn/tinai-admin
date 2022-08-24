@@ -1,6 +1,5 @@
 import type { AppProps } from 'next/app';
 import '../sass/main.scss';
-import Layout from '../components/Layout';
 import { DarkModeContextProvider } from '../context/DarkModeContext';
 import 'antd/dist/antd.css';
 import React from 'react';
@@ -13,9 +12,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <DarkModeContextProvider>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
+          <Component {...pageProps} />
         </DarkModeContextProvider>
       </PersistGate>
     </Provider>
