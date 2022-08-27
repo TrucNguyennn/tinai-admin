@@ -1,6 +1,6 @@
 import Products from '../../containers/Products';
-import Title from '../../components/Title';
 import Layout from '@/components/Layout';
+import Title from '@/components/Title';
 
 const ProductsPage = () => {
   return (

@@ -1,6 +1,6 @@
 import NewUser from '../../../containers/NewUser';
-import Title from '../../../components/Title';
 import Layout from '@/components/Layout';
+import Title from '@/components/Title';
 
 const NewUserPage = () => {
   return (

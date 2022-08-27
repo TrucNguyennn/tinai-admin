@@ -16,3 +16,8 @@ export const transformStatusToTag = (status: string) => {
 export const doingSomething = () => {
   // do something
 };
+
+export const getAge = (birthday: Date): number => {
+  const now = new Date();
+  return now.getFullYear() - birthday.getFullYear();
+};

@@ -1,7 +1,7 @@
 import Layout from '@/components/Layout';
+import Title from '@/components/Title';
 import type { NextPage } from 'next';
 import React from 'react';
-import Title from '../components/Title';
 import Home from '../containers/Home';
 
 const HomePage: NextPage = () => {

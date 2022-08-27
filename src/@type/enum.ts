@@ -5,9 +5,9 @@ export enum Method {
   delete = `delete`,
 }
 export enum GenderEnum {
-  male = `male`,
-  female = `female`,
-  other = `other`,
+  MALE = `male`,
+  FEMALE = `female`,
+  OTHER = `other`,
 }
 export enum CodeStatus {
   Success = 200,
@@ -36,4 +36,32 @@ export enum LocaleEnum {
 }
 export enum ErrorCode {
   EXCEED_TIMES_WRONG_OTP = `EXCEED_TIMES_WRONG_OTP`,
+}
+
+export enum MaritalStatusEnum {
+  SINGLE = `single`,
+  MARRIED = `married`,
+  DIVORCED = `divorced`,
+}
+
+export enum AlcoholEnum {
+  SOMETIMES = `sometime`,
+  USUALLY = `usually`,
+  NEVER = `never`,
+}
+
+export enum ReligionEnum {
+  BUDDHISM = `buddhism`,
+  GOD = `god`,
+  OTHER = `other`,
+  NON_RELIGIONS = `non-religion`,
+}
+
+export enum EducationEnum {
+  PRIMARY = `primary`,
+  SECONDARY = `secondary`,
+  HIGH_SCHOOL = `high_school`,
+  COLLEGE = `college`,
+  UNIVERSITY = `university`,
+  OTHER = `other`,
 }
