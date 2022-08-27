@@ -7,13 +7,8 @@ const Users = () => {
       <div className={'users__content-container'}>
         <main className={'users__table-container'}>
           <div className={'users__table-container-top'}>
-            <div className="table-title">Customers</div>
-
-            <Link href={'/users/new'}>
-              <div className={'button'}>Add New</div>
-            </Link>
+            <div className="table-title">Người dùng</div>
           </div>
-
           <UsersTable />
         </main>
       </div>

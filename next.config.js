@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   swcMinify: true,
   images: {
-    domains: ['cdn.animaapp.com'],
+    domains: ['cdn.animaapp.com', 'res.cloudinary.com'],
   },
 };
 
