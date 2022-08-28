@@ -1,6 +1,7 @@
 import { IResponse } from '@/@type/interface/response';
 import usersApi from '@/services/users.api';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { resetIsLogin } from './authSlice';
 
 export const getAllUsersBasic = createAsyncThunk(`admin/users`, async () => {
   return await usersApi.getAllBasicUser();
@@ -36,6 +37,7 @@ export const usersSlice = createSlice({
     builder.addCase(
       getAllUsersBasic.fulfilled,
       (state: IUserBasic[], action: PayloadAction<IResponse<IUserBasic[]>>) => {
+        console.log(`action`, action);
         if (action.payload.status) {
           const res = action.payload.data as IUserBasic[];
           for (let i = 0; i < res.length; i++) {

@@ -3,18 +3,6 @@ interface ILogin {
   password: string;
 }
 
-interface IUserBasic {
-  id: string;
-  email: string;
-  avatar: string;
-  name: string;
-  birthday: Date;
-  createAt: Date;
-  updateAt: Date;
-  isBlock: boolean;
-  isVerify: boolean;
-}
-
 interface IUserImages {
   id: string;
   url: string;
@@ -48,16 +36,16 @@ interface IUserDetail {
   hobbies: IUserHobbies[];
 }
 
-interface IPurpose {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-}
-
 interface ICreateUpdatePurpose {
   id?: string;
   title?: string;
   description?: string;
   file?: File;
+}
+
+interface IAdmin {
+  id: string;
+  name: string;
+  email: string;
+  avatar: string;
 }

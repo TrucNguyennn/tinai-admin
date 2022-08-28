@@ -12,9 +12,11 @@ import {
 import Link from 'next/link';
 import { useContext } from 'react';
 import { DarkModeContext } from '../context/DarkModeContext';
+import { useRouter } from 'next/router';
 
 const Sidebar = ({ setDarkMode }) => {
   const { dispatch } = useContext(DarkModeContext);
+  const router = useRouter();
 
   return (
     <div className={'sidebar'}>
@@ -35,17 +37,13 @@ const Sidebar = ({ setDarkMode }) => {
           </div>
 
           <p className={'title'}>Lists</p>
-          <div className={'item'}>
+          <div className={'item'} onClick={() => router.push(`/users`)}>
             <FaUser className={'icon'} />
-            <Link href={'/users'}>
-              <span>Users</span>
-            </Link>
+            <span>Users</span>
           </div>
-          <div className={'item'}>
+          <div className={'item'} onClick={() => router.push(`/purposes`)}>
             <MdOutlineStoreMallDirectory className={'icon'} />
-            <Link href={'/purposes'}>
-              <span>Purposes</span>
-            </Link>
+            <span>Purposes</span>
           </div>
           <div className={'item'}>
             <MdCreditCard className={'icon'} />

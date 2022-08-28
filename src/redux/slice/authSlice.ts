@@ -6,8 +6,18 @@ export const Login = createAsyncThunk(`admin/login`, async (data: ILogin) => {
   return await authApi.login(data);
 });
 
+export const getCurrentAdmin = createAsyncThunk(`admin/current`, async () => {
+  return await authApi.getCurrentAdmin();
+});
+
 const initialValue: IAuth = {
   isLogin: false,
+  admin: {
+    id: ``,
+    avatar: ``,
+    email: ``,
+    name: ``,
+  },
 };
 
 export const authSlice = createSlice({
@@ -24,6 +34,20 @@ export const authSlice = createSlice({
         }
       },
     );
+    builder.addCase(
+      getCurrentAdmin.fulfilled,
+      (state: IAuth, action: PayloadAction<IResponse<string | IAdmin>>) => {
+        if (action.payload.status) {
+          const res = action.payload.data as IAdmin;
+
+          state.admin = res;
+        }
+      },
+    );
+    builder.addCase(getCurrentAdmin.rejected, (state: IAuth) => {
+      localStorage.removeItem(`token`);
+      state.isLogin = false;
+    });
   },
   reducers: {},
 });
