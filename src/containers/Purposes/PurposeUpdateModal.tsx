@@ -22,7 +22,7 @@ const PurposeUpdateModel: FC<IPurposeUpdateModelComponent> = ({
       string | IPurpose
     >;
 
-    if (res.status) {
+    if (res && res.status) {
       message.success(`Cập nhập thành công.`);
       onOk();
       return true;

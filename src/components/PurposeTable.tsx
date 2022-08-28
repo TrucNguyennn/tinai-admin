@@ -40,7 +40,7 @@ const PurposesTable = () => {
   const handleDelete = async (id: string) => {
     const res = (await dispatch(deletePurpose(id)))
       .payload as IResponse<string>;
-    if (res.status) {
+    if (res && res.status) {
       message.success(`Xóa thành công.`);
     } else {
       message.error(`Xóa thất bại.`);

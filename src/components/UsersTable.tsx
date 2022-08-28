@@ -35,7 +35,7 @@ const UsersTable = () => {
       async onOk() {
         const res = (await dispatch(blockUser(id)))
           .payload as IResponse<string>;
-        if (!res.status) {
+        if (res && !res.status) {
           message.error(`Block user fail.`);
         }
       },
@@ -47,7 +47,7 @@ const UsersTable = () => {
 
   const handleUnblock = async (id: string) => {
     const res = (await dispatch(unblockUser(id))).payload as IResponse<string>;
-    if (!res.status) message.error(`Unblock user fail`);
+    if (res && !res.status) message.error(`Unblock user fail`);
   };
 
   const columns = [
