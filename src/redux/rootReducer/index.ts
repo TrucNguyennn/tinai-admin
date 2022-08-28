@@ -2,6 +2,7 @@ import { combineReducers } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import authSlice from '../slice/authSlice';
+import purposeSlice from '../slice/purposeSlice';
 import usersSlice from '../slice/usersSlice';
 
 const persistConfig = {
@@ -12,6 +13,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   authSlice,
   usersSlice,
+  purposeSlice,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

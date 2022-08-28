@@ -54,3 +54,10 @@ interface IPurpose {
   description: string;
   image: string;
 }
+
+interface ICreateUpdatePurpose {
+  id?: string;
+  title?: string;
+  description?: string;
+  file?: File;
+}
