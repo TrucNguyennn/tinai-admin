@@ -15,7 +15,7 @@ const ProfilePage = () => {
     if (purposes.length === 0) {
       const res = (await dispatch(getAll())).payload as IResponse<IUserBasic[]>;
 
-      if (!res.status) {
+      if (res && !res.status) {
         message.error(`Can not get users data`);
       }
     }

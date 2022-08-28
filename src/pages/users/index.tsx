@@ -17,7 +17,7 @@ const UsersPage = () => {
       const res = (await dispatch(getAllUsersBasic())).payload as IResponse<
         IUserBasic[]
       >;
-      if (res && !res.status) {
+      if (res && res && !res.status) {
         message.error(`Can not get users data`);
       }
     }

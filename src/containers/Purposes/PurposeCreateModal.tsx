@@ -28,7 +28,7 @@ const PurposeCreateModel: FC<IPurposeCreateModelComponent> = ({
       string | IPurpose
     >;
 
-    if (res.status) {
+    if (res && res.status) {
       message.success(`Thêm mới thành công.`);
       onOk();
       return true;
