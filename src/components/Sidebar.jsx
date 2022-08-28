@@ -43,8 +43,8 @@ const Sidebar = ({ setDarkMode }) => {
           </div>
           <div className={'item'}>
             <MdOutlineStoreMallDirectory className={'icon'} />
-            <Link href={'/products'}>
-              <span>Products</span>
+            <Link href={'/purposes'}>
+              <span>Purposes</span>
             </Link>
           </div>
           <div className={'item'}>
