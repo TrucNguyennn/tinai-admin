@@ -94,8 +94,11 @@ const UsersTable = () => {
   };
 
   const handlePaginateChange = (page: number, pageSize: number) => {
-    setCurrentPage(1);
-    setLimitPage(pageSize);
+    setCurrentPage(page);
+    if (limitPage !== pageSize) {
+      setLimitPage(pageSize);
+      setCurrentPage(1);
+    }
   };
   const handleTableChange = async (pagination: TablePaginationConfig) => {
     const result = (
