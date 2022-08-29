@@ -1,10 +1,12 @@
 import { Method } from '@/@type';
-import { IResponse } from '@/@type/interface/response';
+import { IPagination, IResponse } from '@/@type/interface/response';
 import axiosApiCall from '@/utils/api';
 
 const usersApi = {
-  getAllBasicUser: async (): Promise<IResponse<IUserBasic[]>> => {
-    const url = `secure/users/get-all`;
+  getAllBasicUser: async (
+    dto: IPageOption,
+  ): Promise<IResponse<IPagination<IUserBasic>>> => {
+    const url = `secure/users/get-all?page=${dto.page}&limit=${dto.limit}`;
     return await axiosApiCall(url, Method.get);
   },
   getUserDetail: async (

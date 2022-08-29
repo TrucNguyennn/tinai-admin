@@ -11,12 +11,15 @@ import { useRouter } from 'next/router';
 const UsersPage = () => {
   const dispatch = useAppDispatch();
   const users = useAppSelector((state: RootState) => state.usersSlice);
+  const limit = process.env.NEXT_PUBLIC_LIMIT_OPTION as string;
 
   const fetchData = async () => {
-    if (users.length === 0) {
-      const res = (await dispatch(getAllUsersBasic())).payload as IResponse<
-        IUserBasic[]
-      >;
+    if (users.list.length === 0) {
+      const res = (
+        await dispatch(
+          getAllUsersBasic({ page: 0, limit: parseInt(limit) ?? 5 }),
+        )
+      ).payload as IResponse<IUserBasic[]>;
       if (res && !res.status) {
         message.error(`Can not get users data`);
       }

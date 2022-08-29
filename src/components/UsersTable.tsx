@@ -1,10 +1,23 @@
 import React from 'react';
-import { Image, Table, Tag, Button, Space, Modal, message } from 'antd';
+import {
+  Image,
+  Table,
+  Tag,
+  Button,
+  Space,
+  Modal,
+  message,
+  Pagination,
+} from 'antd';
 import Link from 'next/link';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { useAppSelector, RootState, useAppDispatch } from '@/redux';
 import { getAge } from '@/utils';
-import { blockUser, unblockUser } from '@/redux/slice/usersSlice';
+import {
+  blockUser,
+  getAllUsersBasic,
+  unblockUser,
+} from '@/redux/slice/usersSlice';
 import { IResponse } from '@/@type/interface/response';
 
 const { confirm } = Modal;
@@ -14,15 +27,17 @@ const UsersTable = () => {
 
   const users = useAppSelector((state: RootState) => {
     const result = [];
-    for (let i = 0; i < state.usersSlice.length; i++) {
+    for (let i = 0; i < state.usersSlice.list.length; i++) {
       result.push({
-        ...state.usersSlice[i],
-        key: state.usersSlice[i].id,
-        age: getAge(state.usersSlice[i].birthday),
+        ...state.usersSlice.list[i],
+        key: state.usersSlice.list[i].id,
+        age: getAge(state.usersSlice.list[i].birthday),
       });
     }
     return result;
   });
+  const total = useAppSelector((state: RootState) => state.usersSlice.total);
+  const pageNum = useAppSelector((state: RootState) => state.usersSlice.page);
 
   const hanbleBlock = (id: string) => {
     confirm({
@@ -48,6 +63,19 @@ const UsersTable = () => {
   const handleUnblock = async (id: string) => {
     const res = (await dispatch(unblockUser(id))).payload as IResponse<string>;
     if (res && !res.status) message.error(`Unblock user fail`);
+  };
+
+  const limit = process.env.NEXT_PUBLIC_LIMIT_OPTION as string;
+
+  const handlePaginateChange = async (page: number, pageSize: number) => {
+    const result = (
+      await dispatch(
+        getAllUsersBasic({ page: page - 1, limit: parseInt(limit) ?? 5 }),
+      )
+    ).payload as IResponse<IUserBasic[]>;
+    if (result && !result.status) {
+      message.error(`Can not get users data`);
+    }
   };
 
   const columns = [
@@ -132,10 +160,10 @@ const UsersTable = () => {
     <div>
       <Table
         pagination={{
-          total: users.length,
-          defaultPageSize: 5,
-          showSizeChanger: true,
-          pageSizeOptions: [`5`, `10`, `20`, `30`],
+          total: total,
+          pageSize: parseInt(limit),
+          current: pageNum + 1,
+          onChange: handlePaginateChange,
         }}
         loading={users.length === 0}
         columns={columns}
