@@ -49,3 +49,10 @@ interface IAdmin {
   email: string;
   avatar: string;
 }
+
+interface ISetting {
+  id: string;
+  createdAt: string;
+  radius: number;
+  updatedAt: string;
+}

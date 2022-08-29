@@ -38,6 +38,7 @@ export const authSlice = createSlice({
       getCurrentAdmin.fulfilled,
       (state: IAuth, action: PayloadAction<IResponse<string | IAdmin>>) => {
         if (action.payload.status) {
+          state.isLogin = true;
           const res = action.payload.data as IAdmin;
 
           state.admin = res;

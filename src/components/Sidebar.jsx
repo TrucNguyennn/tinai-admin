@@ -18,69 +18,50 @@ const Sidebar = ({ setDarkMode }) => {
   const { dispatch } = useContext(DarkModeContext);
   const router = useRouter();
 
+  const handleLogout = () => {
+    localStorage.removeItem(`token`);
+    router.push(`/sign-in`);
+  }
+
   return (
     <div className={'sidebar'}>
       <div className={'sidebar__top'}>
-        <h3>Sikal</h3>
+        <h3>Tinher</h3>
       </div>
 
       <hr />
 
       <div className={'sidebar__center'}>
         <div className={'sidebar__center-container'}>
-          <p className={'title'}>Main</p>
+          <p className={'title'}>Chính</p>
           <div className={'item'}>
             <RiDashboardFill className={'icon'} />
             <Link href={'/'}>
-              <span>Dashboard</span>
+              <span>Bảng điều khiển</span>
             </Link>
           </div>
 
-          <p className={'title'}>Lists</p>
+          <p className={'title'}>Danh sách</p>
           <div className={'item'} onClick={() => router.push(`/users`)}>
             <FaUser className={'icon'} />
-            <span>Users</span>
+            <span>Người dùng</span>
           </div>
           <div className={'item'} onClick={() => router.push(`/purposes`)}>
             <MdOutlineStoreMallDirectory className={'icon'} />
-            <span>Purposes</span>
+            <span>Mục đích</span>
           </div>
-          <div className={'item'}>
-            <MdCreditCard className={'icon'} />
-            <span>Orders</span>
-          </div>
-          <div className={'item'}>
-            <MdLocalShipping className={'icon'} />
-            <span>Delivery</span>
-          </div>
-          <p className={'title'}>Useful</p>
-          <div className={'item'}>
-            <MdInsertChart className={'icon'} />
-            <span>Stats</span>
-          </div>
-          <div className={'item'}>
-            <MdNotifications className={'icon'} />
-            <span>Notifications</span>
-          </div>
-
-          <p className={'title'}>Service</p>
-          <div className={'item'}>
+          <div className={'item'} onClick={() => router.push(`/settings`)}>
             <MdSettings className={'icon'} />
-            <span>Settings</span>
+            <span>Cài đặt</span>
           </div>
-          <div className={'item'}>
-            <MdSettings className={'icon'} />
-            <span>Logs</span>
-          </div>
-
-          <p className={'title'}>User</p>
+          <p className={'title'}>Cá nhân</p>
           <div className={'item'}>
             <MdExitToApp className={'icon'} />
-            <span>Profile</span>
+            <span>Cá nhân</span>
           </div>
-          <div className={'item'}>
+          <div className={'item'} onClick={handleLogout}>
             <MdExitToApp className={'icon'} />
-            <span>Logout</span>
+            <span>Đăng xuất</span>
           </div>
         </div>
       </div>
