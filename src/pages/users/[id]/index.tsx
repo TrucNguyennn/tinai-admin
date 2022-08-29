@@ -29,8 +29,6 @@ const UserPage = () => {
   useEffect(() => {
     fetchData(id);
   }, [id]);
-
-  console.log(`user`, user);
   return (
     <Layout>
       <div>

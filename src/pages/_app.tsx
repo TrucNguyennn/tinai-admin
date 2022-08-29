@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     fetchData();
-  }, [pageProps]);
+  }, [Component, pageProps]);
 
   return (
     <Provider store={store}>

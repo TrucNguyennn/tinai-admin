@@ -38,16 +38,16 @@ http.interceptors.response.use(
     return response.data as IResponse;
   },
 
-//   function (error) {
-//     console.log(`error`, error);
+  //   function (error) {
+  //     console.log(`error`, error);
 
-//     return {
-//       status: false,
-//       error_code: error,
-//       data: null,
-//       message: null,
-//     } as IResponse;
-//   },
+  //     return {
+  //       status: false,
+  //       error_code: error,
+  //       data: null,
+  //       message: null,
+  //     } as IResponse;
+  //   },
 );
 
 const axiosApiCall = async <T = any>(

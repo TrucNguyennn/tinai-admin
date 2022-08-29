@@ -17,19 +17,6 @@ const SignIn: FC = () => {
   const router = useRouter();
 
   const onFinish = async (values: any) => {
-    console.log(values);
-
-    // axios
-    //   .post(`http://localhost:5500/secure/auth/admin/login`, {
-    //     username: values.username,
-    //     password: values.password,
-    //   })
-    //   .then(function (response) {
-    //     console.log(response);
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
     const res = (
       await dispatch(
         Login({ username: values.username, password: values.password }),
