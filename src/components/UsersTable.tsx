@@ -41,9 +41,9 @@ const UsersTable = () => {
 
   const hanbleBlock = (id: string) => {
     confirm({
-      title: `Bạn có chắc muốn xóa người dùng này?`,
+      title: `Bạn có chắc muốn chặn người dùng này?`,
       icon: <ExclamationCircleOutlined />,
-      content: `Thông tin về người dùng này sẽ bị xóa khỏi kho dữ liệu của bạn.`,
+      content: `Thông tin về người dùng này sẽ bị chặn và không thể tiếp tục sử dụng ứng dụng.`,
       okText: `Có`,
       okType: `danger`,
       cancelText: `Không`,
