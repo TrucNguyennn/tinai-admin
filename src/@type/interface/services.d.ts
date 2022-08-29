@@ -57,3 +57,8 @@ interface ISetting {
   radius: number;
   updatedAt: string;
 }
+
+interface IPageOption {
+  page: number;
+  limit: number;
+}
