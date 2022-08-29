@@ -1,6 +1,5 @@
 import Sidebar from './Sidebar';
-import Header from './Header';
-import { FC, useContext, useEffect } from 'react';
+import { FC, useContext } from 'react';
 import { DarkModeContext } from '../context/DarkModeContext';
 import { useRouter } from 'next/router';
 import { RootState, useAppSelector } from '@/redux';
@@ -11,14 +10,14 @@ const Layout: FC<ILayout> = ({ children }) => {
   const token = localStorage.getItem(`token`);
   const { darkMode } = useContext(DarkModeContext);
 
+  console.log(`isLogin`, isLogin);
+
   if (isLogin && token) {
     return (
       <div className={darkMode ? `layout dark` : `layout`}>
         <Sidebar setDarkMode={undefined} />
 
         <div className={`layout__content-container`}>
-          <Header />
-
           <main>{children}</main>
         </div>
       </div>

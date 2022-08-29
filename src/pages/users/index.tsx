@@ -17,7 +17,7 @@ const UsersPage = () => {
       const res = (await dispatch(getAllUsersBasic())).payload as IResponse<
         IUserBasic[]
       >;
-      if (res && res && !res.status) {
+      if (res && !res.status) {
         message.error(`Can not get users data`);
       }
     }
@@ -30,7 +30,7 @@ const UsersPage = () => {
   return (
     <Layout>
       <div>
-        <Title title={`Customers`} />
+        <Title title={`Người dùng`} />
         <Users />
       </div>
     </Layout>
