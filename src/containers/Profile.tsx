@@ -1,17 +1,7 @@
 import { IResponse } from '@/@type/interface/response';
 import { RootState, useAppDispatch, useAppSelector } from '@/redux';
 import { updateAdmin } from '@/redux/slice/authSlice';
-import {
-  Avatar,
-  Button,
-  Col,
-  Form,
-  Row,
-  Spin,
-  Image,
-  Input,
-  message,
-} from 'antd';
+import { Avatar, Button, Form, Image, Input, message, Spin } from 'antd';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 
 const Profile = () => {

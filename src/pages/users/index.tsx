@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Users from '../../containers/Users';
 import Layout from '@/components/Layout';
 import { RootState, useAppDispatch, useAppSelector } from '@/redux';
@@ -6,7 +7,6 @@ import { getAllUsersBasic } from '@/redux/slice/usersSlice';
 import { IResponse } from '@/@type/interface/response';
 import { message } from 'antd';
 import Title from '@/components/Title';
-import { useRouter } from 'next/router';
 
 const UsersPage = () => {
   const dispatch = useAppDispatch();

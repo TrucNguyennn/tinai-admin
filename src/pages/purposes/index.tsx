@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { IResponse } from '@/@type/interface/response';
 import Layout from '@/components/Layout';
 import Title from '@/components/Title';

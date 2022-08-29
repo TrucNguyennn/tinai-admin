@@ -55,7 +55,7 @@ const Purpose: FC<IPurposeComponent> = ({ purpose, onSubmit }) => {
       file: image,
     };
 
-    const res = await onSubmit(dto);
+    await onSubmit(dto);
     setIsSubmit(false);
   };
 

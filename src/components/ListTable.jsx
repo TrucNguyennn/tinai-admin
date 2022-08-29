@@ -1,7 +1,6 @@
-import { Table, Tag, Image } from 'antd';
-import { transformStatusToTag } from '../utils';
+import { Image, Input, Table, Tag } from 'antd';
 import { MdOutlineSearch } from 'react-icons/md';
-import { Input } from 'antd';
+import { transformStatusToTag } from '../utils';
 
 const ListTable = () => {
   const dataSource = [
@@ -108,6 +107,7 @@ const ListTable = () => {
             width={60}
             height={60}
             src={row?.img}
+            alt="Attachment image"
           />
         );
       },

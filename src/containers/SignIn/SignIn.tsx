@@ -1,16 +1,12 @@
-import { FC } from 'react';
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input, message } from 'antd';
-import styleScss from './SignIn.module.scss';
-import Image from 'next/image';
-import authApi from '@/services/auth.api';
-import axiosApiCall from '@/utils/api';
-import { Method } from '@/@type';
-import axios from 'axios';
+import { IResponse } from '@/@type/interface/response';
 import { useAppDispatch } from '@/redux';
 import { Login } from '@/redux/slice/authSlice';
-import { IResponse } from '@/@type/interface/response';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { Button, Form, Input, message } from 'antd';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { FC } from 'react';
+import styleScss from './SignIn.module.scss';
 
 const SignIn: FC = () => {
   const dispatch = useAppDispatch();

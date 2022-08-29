@@ -28,7 +28,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     useEffect(() => {
       const handleStart = (url: any) =>
         url !== router.asPath && setLoading(true);
-      const handleComplete = (url: any) => {
+      const handleComplete = () => {
         setLoading(false);
       };
 

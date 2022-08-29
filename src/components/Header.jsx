@@ -1,16 +1,14 @@
+import { useContext } from 'react';
 import {
-  MdSearch,
-  MdOutlineLanguage,
-  MdOutlineDarkMode,
-  MdFullscreenExit,
-} from 'react-icons/md';
-import {
-  MdNotificationsNone,
   MdChatBubbleOutline,
+  MdFullscreenExit,
+  MdNotificationsNone,
+  MdOutlineDarkMode,
+  MdOutlineLanguage,
   MdOutlineList,
   MdOutlineWbSunny,
+  MdSearch,
 } from 'react-icons/md';
-import { useContext } from 'react';
 import { DarkModeContext } from '../context/DarkModeContext';
 
 const link =
@@ -70,6 +68,7 @@ const Header = () => {
           </div>
 
           <div className={'item'}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={link} className={'avatar'} alt="" />
           </div>
         </div>

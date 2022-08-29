@@ -6,6 +6,7 @@ const HomePage: NextPage = () => {
   const router = useRouter();
   useEffect(() => {
     router.push(`/users`);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <></>;
