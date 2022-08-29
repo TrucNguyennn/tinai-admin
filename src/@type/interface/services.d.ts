@@ -48,6 +48,7 @@ interface IAdmin {
   name: string;
   email: string;
   avatar: string;
+  username: string;
 }
 
 interface ISetting {

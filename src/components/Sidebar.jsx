@@ -55,7 +55,7 @@ const Sidebar = ({ setDarkMode }) => {
             <span>Cài đặt</span>
           </div>
           <p className={'title'}>Cá nhân</p>
-          <div className={'item'}>
+          <div className={'item'} onClick={() => router.push(`/profile`)}>
             <MdExitToApp className={'icon'} />
             <span>Cá nhân</span>
           </div>

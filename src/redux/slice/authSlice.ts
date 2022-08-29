@@ -10,6 +10,13 @@ export const getCurrentAdmin = createAsyncThunk(`admin/current`, async () => {
   return await authApi.getCurrentAdmin();
 });
 
+export const updateAdmin = createAsyncThunk(
+  `admin/update`,
+  async (data: FormData) => {
+    return await authApi.updateAdmin(data);
+  },
+);
+
 const initialValue: IAuth = {
   isLogin: false,
   admin: {
@@ -17,6 +24,7 @@ const initialValue: IAuth = {
     avatar: ``,
     email: ``,
     name: ``,
+    username: ``,
   },
 };
 
@@ -49,6 +57,15 @@ export const authSlice = createSlice({
       localStorage.removeItem(`token`);
       state.isLogin = false;
     });
+    builder.addCase(
+      updateAdmin.fulfilled,
+      (state: IAuth, action: PayloadAction<IResponse<string | IAdmin>>) => {
+        if (action.payload.status) {
+          const res = action.payload.data as IAdmin;
+          state.admin = res;
+        }
+      },
+    );
   },
   reducers: {},
 });
