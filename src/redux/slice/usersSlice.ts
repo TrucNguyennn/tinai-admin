@@ -30,6 +30,13 @@ export const unblockUser = createAsyncThunk(
   },
 );
 
+export const deleteUser = createAsyncThunk(
+  `admin/delete-user`,
+  async (id: string) => {
+    return await usersApi.deleteUser(id);
+  },
+);
+
 const initialValue: IPagination<IUserBasic> = {
   list: [],
   page: 0,
@@ -86,6 +93,19 @@ export const usersSlice = createSlice({
           const res = action.payload.data as string;
           const index = state.list.findIndex((item) => item.id === res);
           state.list[index].isBlock = false;
+        }
+      },
+    );
+    builder.addCase(
+      deleteUser.fulfilled,
+      (
+        state: IPagination<IUserBasic>,
+        action: PayloadAction<IResponse<string>>,
+      ) => {
+        if (action.payload.status) {
+          const res = action.payload.data as string;
+          const index = state.list.findIndex((item) => item.id === res);
+          state.list.splice(index, 1);
         }
       },
     );
