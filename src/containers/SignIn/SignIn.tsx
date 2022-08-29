@@ -23,9 +23,7 @@ const SignIn: FC = () => {
       )
     ).payload as IResponse<string>;
 
-    console.log(`res`, res);
-
-    if (!res.status) {
+    if (!res || !res.status) {
       message.error(`Đăng nhập thất bại`);
     } else {
       router.push(`/`);
