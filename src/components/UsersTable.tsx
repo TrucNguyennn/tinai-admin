@@ -4,6 +4,7 @@ import {
   blockUser,
   getAllUsersBasic,
   unblockUser,
+  deleteUser,
 } from '@/redux/slice/usersSlice';
 import { getAge } from '@/utils';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
@@ -17,12 +18,14 @@ import {
   TablePaginationConfig,
   Tag,
 } from 'antd';
-import Link from 'next/link';
+
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 const { confirm } = Modal;
 
 const UsersTable = () => {
+  const router = useRouter();
   const dispatch = useAppDispatch();
 
   const users = useAppSelector((state: RootState) => {
@@ -42,20 +45,20 @@ const UsersTable = () => {
 
   const [currentPage, setCurrentPage] = useState(page + 1);
   const [limitPage, setLimitPage] = useState(limit | 5);
+
   const hanbleBlock = (id: string) => {
     confirm({
       title: `Bạn có chắc muốn chặn người dùng này?`,
       icon: <ExclamationCircleOutlined />,
-      content: `Thông tin về người dùng này sẽ bị chặn và không thể tiếp tục sử dụng ứng dụng.`,
       okText: `Có`,
       okType: `danger`,
       cancelText: `Không`,
       async onOk() {
         const res = (await dispatch(blockUser(id)))
           .payload as IResponse<string>;
-        if (res && !res.status) {
-          message.error(`Block user fail.`);
-        }
+        if (!res || (res && !res.status))
+          message.error(`Chặn thất bại. Vui lòng thử lại sau`);
+        else message.success(`Chặn ngưởi dùng thành công.`);
       },
       onCancel() {
         console.log(`Cancel`);
@@ -63,13 +66,35 @@ const UsersTable = () => {
     });
   };
 
+  const hanbleDelete = (id: string) => {
+    confirm({
+      title: `Bạn có chắc muốn xóa người dùng này?`,
+      icon: <ExclamationCircleOutlined />,
+      content: `Thông tin về người dùng này sẽ bị xóa và không thể tiếp tục sử dụng ứng dụng.`,
+      okText: `Có`,
+      okType: `danger`,
+      cancelText: `Không`,
+      async onOk() {
+        const res = (await dispatch(deleteUser(id)))
+          .payload as IResponse<string>;
+        if (!res || (res && !res.status)) {
+          message.error(`Xóa thất bại. Vui lòng thử lại sau`);
+        } else message.success(`Xoá ngưởi dùng thành công.`);
+      },
+      onCancel() {
+        console.log(`Cancel`);
+      },
+    });
+  };
   const handleUnblock = async (id: string) => {
     const res = (await dispatch(unblockUser(id))).payload as IResponse<string>;
-    if (res && !res.status) message.error(`Unblock user fail`);
+    if (!res || (res && !res.status))
+      message.error(`Bỏ chặn thất bại. Vui lòng thử lại sau`);
+    else message.success(`Bỏ chặn ngưởi dùng thành công.`);
   };
 
   const handlePaginateChange = (page: number, pageSize: number) => {
-    setCurrentPage(page);
+    setCurrentPage(1);
     setLimitPage(pageSize);
   };
   const handleTableChange = async (pagination: TablePaginationConfig) => {
@@ -81,8 +106,8 @@ const UsersTable = () => {
         }),
       )
     ).payload as IResponse<IUserBasic[]>;
-    if (result && !result.status) {
-      message.error(`Can not get users data`);
+    if (!result || (result && !result.status)) {
+      message.error(`Không thể lấy dữ liệu. Vui lòng thử lại sau.`);
     }
   };
   const columns = [
@@ -146,11 +171,22 @@ const UsersTable = () => {
       render: (value: IUserBasic) => {
         return (
           <Space>
-            <Button>
-              <Link href={`/users/${value.id}`}>Xem</Link>
+            <Button onClick={() => router.push(`/users/${value.id}`)}>
+              Xem
+            </Button>
+            <Button
+              type="primary"
+              danger
+              onClick={() => hanbleDelete(value.id)}
+            >
+              Xóa
             </Button>
             {!value.isBlock && value.isVerify && (
-              <Button onClick={() => hanbleBlock(value.id)} danger>
+              <Button
+                onClick={() => hanbleBlock(value.id)}
+                type="dashed"
+                danger
+              >
                 Chặn
               </Button>
             )}
@@ -162,7 +198,6 @@ const UsersTable = () => {
       },
     },
   ];
-  console.log(users.length);
 
   return (
     <div>
