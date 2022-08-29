@@ -1,18 +1,14 @@
-import Layout from '@/components/Layout';
-import Title from '@/components/Title';
 import type { NextPage } from 'next';
-import React from 'react';
-import Home from '../containers/Home';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 const HomePage: NextPage = () => {
-  return (
-    <Layout>
-      <>
-        <Title title={`Dashboard`} />
-        <Home />
-      </>
-    </Layout>
-  );
+  const router = useRouter();
+  useEffect(() => {
+    router.push(`/users`);
+  }, []);
+
+  return <></>;
 };
 
 export default HomePage;

@@ -21,26 +21,18 @@ const Sidebar = ({ setDarkMode }) => {
   const handleLogout = () => {
     localStorage.removeItem(`token`);
     router.push(`/sign-in`);
-  }
+  };
 
   return (
     <div className={'sidebar'}>
       <div className={'sidebar__top'}>
-        <h3>Tinher</h3>
+        <h3>Tinai</h3>
       </div>
 
       <hr />
 
       <div className={'sidebar__center'}>
         <div className={'sidebar__center-container'}>
-          <p className={'title'}>Chính</p>
-          <div className={'item'}>
-            <RiDashboardFill className={'icon'} />
-            <Link href={'/'}>
-              <span>Bảng điều khiển</span>
-            </Link>
-          </div>
-
           <p className={'title'}>Danh sách</p>
           <div className={'item'} onClick={() => router.push(`/users`)}>
             <FaUser className={'icon'} />

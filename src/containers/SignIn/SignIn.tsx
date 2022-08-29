@@ -32,7 +32,7 @@ const SignIn: FC = () => {
 
   return (
     <div className={styleScss.signIn}>
-      <div className={styleScss.signIn__title}>Tinher</div>
+      <div className={styleScss.signIn__title}>Tinai</div>
       <Form
         name="normal_login"
         className={styleScss.signIn__formSignIn}

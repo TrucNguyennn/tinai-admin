@@ -1,24 +1,24 @@
-import React from 'react';
-import {
-  Image,
-  Table,
-  Tag,
-  Button,
-  Space,
-  Modal,
-  message,
-  Pagination,
-} from 'antd';
-import Link from 'next/link';
-import { ExclamationCircleOutlined } from '@ant-design/icons';
-import { useAppSelector, RootState, useAppDispatch } from '@/redux';
-import { getAge } from '@/utils';
+import { IResponse } from '@/@type/interface/response';
+import { RootState, useAppDispatch, useAppSelector } from '@/redux';
 import {
   blockUser,
   getAllUsersBasic,
   unblockUser,
 } from '@/redux/slice/usersSlice';
-import { IResponse } from '@/@type/interface/response';
+import { getAge } from '@/utils';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+import {
+  Button,
+  Image,
+  message,
+  Modal,
+  Space,
+  Table,
+  TablePaginationConfig,
+  Tag,
+} from 'antd';
+import Link from 'next/link';
+import { useState } from 'react';
 
 const { confirm } = Modal;
 
@@ -36,9 +36,12 @@ const UsersTable = () => {
     }
     return result;
   });
-  const total = useAppSelector((state: RootState) => state.usersSlice.total);
-  const pageNum = useAppSelector((state: RootState) => state.usersSlice.page);
+  const { total, page, limit } = useAppSelector(
+    (state: RootState) => state.usersSlice,
+  );
 
+  const [currentPage, setCurrentPage] = useState(page + 1);
+  const [limitPage, setLimitPage] = useState(limit | 5);
   const hanbleBlock = (id: string) => {
     confirm({
       title: `Bạn có chắc muốn chặn người dùng này?`,
@@ -65,19 +68,23 @@ const UsersTable = () => {
     if (res && !res.status) message.error(`Unblock user fail`);
   };
 
-  const limit = process.env.NEXT_PUBLIC_LIMIT_OPTION as string;
-
-  const handlePaginateChange = async (page: number, pageSize: number) => {
+  const handlePaginateChange = (page: number, pageSize: number) => {
+    setCurrentPage(page);
+    setLimitPage(pageSize);
+  };
+  const handleTableChange = async (pagination: TablePaginationConfig) => {
     const result = (
       await dispatch(
-        getAllUsersBasic({ page: page - 1, limit: parseInt(limit) ?? 5 }),
+        getAllUsersBasic({
+          page: (pagination.current as number) - 1 ?? 0,
+          limit: pagination.pageSize ?? 5,
+        }),
       )
     ).payload as IResponse<IUserBasic[]>;
     if (result && !result.status) {
       message.error(`Can not get users data`);
     }
   };
-
   const columns = [
     {
       title: `STT`,
@@ -155,19 +162,24 @@ const UsersTable = () => {
       },
     },
   ];
+  console.log(users.length);
 
   return (
     <div>
       <Table
         pagination={{
           total: total,
-          pageSize: parseInt(limit),
-          current: pageNum + 1,
+          pageSize: +limitPage,
+          current: currentPage,
+          defaultPageSize: +limit,
+          showSizeChanger: true,
           onChange: handlePaginateChange,
+          pageSizeOptions: [`5`, `10`, `20`, `30`],
         }}
-        loading={users.length === 0}
+        loading={false}
         columns={columns}
         dataSource={users}
+        onChange={handleTableChange}
       />
     </div>
   );
