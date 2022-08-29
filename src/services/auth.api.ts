@@ -11,6 +11,10 @@ const authApi = {
     const url = `secure/admins/get-current-admin`;
     return await axiosApiCall(url, Method.get);
   },
+  updateAdmin: async (data: FormData): Promise<IResponse<string | IAdmin>> => {
+    const url = `secure/admins`;
+    return await axiosApiCall(url, Method.put, data, true);
+  },
 };
 
 export default authApi;
