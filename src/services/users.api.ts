@@ -23,6 +23,10 @@ const usersApi = {
     const url = `secure/users/unblock/${id}`;
     return await axiosApiCall(url, Method.post);
   },
+  deleteUser: async (id: string): Promise<IResponse<string>> => {
+    const url = `secure/users/${id}`;
+    return await axiosApiCall(url, Method.delete);
+  },
 };
 
 export default usersApi;

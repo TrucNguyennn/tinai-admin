@@ -15,14 +15,17 @@ import { useAppSelector, RootState, useAppDispatch } from '@/redux';
 import { getAge } from '@/utils';
 import {
   blockUser,
+  deleteUser,
   getAllUsersBasic,
   unblockUser,
 } from '@/redux/slice/usersSlice';
 import { IResponse } from '@/@type/interface/response';
+import { useRouter } from 'next/router';
 
 const { confirm } = Modal;
 
 const UsersTable = () => {
+  const router = useRouter();
   const dispatch = useAppDispatch();
 
   const users = useAppSelector((state: RootState) => {
@@ -41,6 +44,26 @@ const UsersTable = () => {
 
   const hanbleBlock = (id: string) => {
     confirm({
+      title: `Bạn có chắc muốn chặn người dùng này?`,
+      icon: <ExclamationCircleOutlined />,
+      okText: `Có`,
+      okType: `danger`,
+      cancelText: `Không`,
+      async onOk() {
+        const res = (await dispatch(blockUser(id)))
+          .payload as IResponse<string>;
+        if (res && !res.status) {
+          message.error(`Block user fail.`);
+        }
+      },
+      onCancel() {
+        console.log(`Cancel`);
+      },
+    });
+  };
+
+  const hanbleDelete = (id: string) => {
+    confirm({
       title: `Bạn có chắc muốn xóa người dùng này?`,
       icon: <ExclamationCircleOutlined />,
       content: `Thông tin về người dùng này sẽ bị xóa khỏi kho dữ liệu của bạn.`,
@@ -48,7 +71,7 @@ const UsersTable = () => {
       okType: `danger`,
       cancelText: `Không`,
       async onOk() {
-        const res = (await dispatch(blockUser(id)))
+        const res = (await dispatch(deleteUser(id)))
           .payload as IResponse<string>;
         if (res && !res.status) {
           message.error(`Block user fail.`);
@@ -139,11 +162,22 @@ const UsersTable = () => {
       render: (value: IUserBasic) => {
         return (
           <Space>
-            <Button>
-              <Link href={`/users/${value.id}`}>Xem</Link>
+            <Button onClick={() => router.push(`/users/${value.id}`)}>
+              Xem
+            </Button>
+            <Button
+              type="primary"
+              danger
+              onClick={() => hanbleDelete(value.id)}
+            >
+              Xóa
             </Button>
             {!value.isBlock && value.isVerify && (
-              <Button onClick={() => hanbleBlock(value.id)} danger>
+              <Button
+                onClick={() => hanbleBlock(value.id)}
+                type="dashed"
+                danger
+              >
                 Chặn
               </Button>
             )}
